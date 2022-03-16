@@ -13,9 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, CoursesCardListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatButtonModule,
     MatMenuModule,
+    MatTabsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
