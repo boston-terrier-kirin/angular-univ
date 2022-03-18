@@ -16,13 +16,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { CreateCourseComponent } from './create-course/create-course.component';
+import { CreateCourseStepOneComponent } from './create-course/create-course-step-one/create-course-step-one.component';
+import { CreateCourseStepTwoComponent } from './create-course/create-course-step-two/create-course-step-two.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, CoursesCardListComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    CoursesCardListComponent,
+    CreateCourseComponent,
+    CreateCourseStepOneComponent,
+    CreateCourseStepTwoComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatSidenavModule,
     MatToolbarModule,
