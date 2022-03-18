@@ -21,9 +21,7 @@ export class CreateCourseStepOneComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
   get courseTitle() {
     return this.form.controls['title'];

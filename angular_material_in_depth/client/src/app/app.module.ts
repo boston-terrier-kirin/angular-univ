@@ -20,6 +20,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateCourseStepOneComponent } from './create-course/create-course-step-one/create-course-step-one.component';
 import { CreateCourseStepTwoComponent } from './create-course/create-course-step-two/create-course-step-two.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatMenuModule,
     MatTabsModule,
     MatCardModule,
+    MatStepperModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
