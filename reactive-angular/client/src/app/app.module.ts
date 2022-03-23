@@ -21,9 +21,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, CourseDialogComponent],
+  declarations: [AppComponent, HomeComponent, CourseDialogComponent, CoursesCardListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
