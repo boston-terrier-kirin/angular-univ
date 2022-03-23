@@ -3,7 +3,7 @@ import { Course, sortCoursesBySeqNo } from '../model/course';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 import { CoursesService } from '../services/Courses.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,9 +21,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const courses$ = this.coursesService
-      .loadAllCourses()
-      .pipe(map((courses) => courses.sort(sortCoursesBySeqNo)));
+    const courses$ = this.coursesService.loadAllCourses().pipe(
+      // beginnerCourses$とadvancedCourses$の両方でsubscribeしているので2回リクエストが流れるのを、shareReplayで防ぐ。
+      shareReplay(),
+      map((courses) => courses.sort(sortCoursesBySeqNo))
+    );
 
     this.beginnerCourses$ = courses$.pipe(
       map((courses) =>
