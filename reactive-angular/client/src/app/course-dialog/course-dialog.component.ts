@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Course } from '../model/course';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { CoursesService } from '../services/Courses.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'course-dialog',
@@ -11,17 +13,17 @@ import * as moment from 'moment';
 })
 export class CourseDialogComponent implements AfterViewInit {
   form: FormGroup;
-
   course: Course;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CourseDialogComponent>,
+    private coursesService: CoursesService,
     @Inject(MAT_DIALOG_DATA) course: Course
   ) {
     this.course = course;
 
-    this.form = fb.group({
+    this.form = this.fb.group({
       description: [course.description, Validators.required],
       category: [course.category, Validators.required],
       releasedAt: [moment(), Validators.required],
@@ -33,6 +35,14 @@ export class CourseDialogComponent implements AfterViewInit {
 
   save() {
     const changes = this.form.value;
+
+    this.coursesService
+      .saveCourse(this.course.id, changes)
+      .subscribe((course) => {
+        // ダイアログをClOSEボタンで閉じたのかSAVEボタンで閉じたのか区別がつくようにするために、
+        // closeにcourseを渡す。
+        this.dialogRef.close(course);
+      });
   }
 
   close() {

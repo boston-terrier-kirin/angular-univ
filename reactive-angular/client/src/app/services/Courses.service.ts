@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Course } from '../model/course';
 
 interface CoursesResponse {
@@ -18,5 +18,11 @@ export class CoursesService {
     return this.httpClient
       .get<CoursesResponse>('/api/courses')
       .pipe(map((res) => res['payload']));
+  }
+
+  saveCourse(courseId: string, changes: Partial<Course>): Observable<Course> {
+    return this.httpClient
+      .put<Course>(`/api/courses/${courseId}`, changes)
+      .pipe(shareReplay());
   }
 }

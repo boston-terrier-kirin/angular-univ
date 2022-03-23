@@ -15,16 +15,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MatMomentDateModule,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, CourseDialogComponent, CoursesCardListComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    CourseDialogComponent,
+    CoursesCardListComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,9 +53,11 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
     MatTabsModule,
     MatCardModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatSelectModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ja-JP' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
