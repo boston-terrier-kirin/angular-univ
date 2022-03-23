@@ -4,6 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 
+interface CoursesResponse {
+  [payload: string]: Course[];
+}
+
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
@@ -16,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.http.get('/api/courses').subscribe((res: any) => {
+    this.http.get<CoursesResponse>('/api/courses').subscribe((res) => {
       const courses: Course[] = res['payload'].sort(sortCoursesBySeqNo);
 
       this.beginnerCourses = courses.filter(
