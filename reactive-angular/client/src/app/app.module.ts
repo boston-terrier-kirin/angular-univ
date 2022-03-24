@@ -27,6 +27,7 @@ import { HomeComponent } from './home/home.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { LoadingComponent } from './loading/loading.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoadingComponent } from './loading/loading.component';
     CourseDialogComponent,
     CoursesCardListComponent,
     LoadingComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

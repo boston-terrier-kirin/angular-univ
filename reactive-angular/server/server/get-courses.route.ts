@@ -2,13 +2,15 @@ import { Request, Response } from 'express';
 import { COURSES } from './db-data';
 
 export function getAllCourses(req: Request, res: Response) {
-  setTimeout(() => {
-    res.status(200).json({
-      payload: Object.values(COURSES).sort(
-        (c1: any, c2: any) => c1.seqNo - c2.seqNo
-      ),
-    });
-  }, 2500);
+  res.status(500).json({ message: 'エラー' });
+
+  // setTimeout(() => {
+  //   res.status(200).json({
+  //     payload: Object.values(COURSES).sort(
+  //       (c1: any, c2: any) => c1.seqNo - c2.seqNo
+  //     ),
+  //   });
+  // }, 2500);
 }
 
 export function getCourseById(req: Request, res: Response) {
