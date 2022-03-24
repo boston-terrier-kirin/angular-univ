@@ -10,6 +10,9 @@ import { LoadingService } from '../loading/loading.service';
   selector: 'course-dialog',
   templateUrl: './course-dialog.component.html',
   styleUrls: ['./course-dialog.component.css'],
+  // CourseDialogComponentは、MatDialogから呼び出しているので、app.componentでprovider登録しているLoadingServiceが見えない。
+  // app.component.htmlに定義したloadingともつながっていない。
+  providers: [LoadingService],
 })
 export class CourseDialogComponent implements AfterViewInit {
   form: FormGroup;
@@ -18,9 +21,9 @@ export class CourseDialogComponent implements AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CourseDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) course: Course,
     private coursesService: CoursesService,
-    private loadingService: LoadingService,
-    @Inject(MAT_DIALOG_DATA) course: Course
+    private loadingService: LoadingService
   ) {
     this.course = course;
 
@@ -30,6 +33,9 @@ export class CourseDialogComponent implements AfterViewInit {
       releasedAt: [moment(), Validators.required],
       longDescription: [course.longDescription, Validators.required],
     });
+
+    // app.component.htmlに定義したloadingとつながっていないので、app.component.htmlのloadingは呼び出せない。
+    this.loadingService.loadingOn();
   }
 
   ngAfterViewInit() {}

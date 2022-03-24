@@ -8,6 +8,11 @@ export class LoadingService {
   private subject = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.subject.asObservable();
 
+  constructor() {
+    // app.componentとcourse-dialog.componentの2箇所でprovider登録しているので、2回呼ばれる。
+    console.log('LoadingService.constructor');
+  }
+
   showLoaderUntilComplete<T>(observable$: Observable<T>): Observable<T> {
     // ofで新しいobservableを作って
     return of(null).pipe(
