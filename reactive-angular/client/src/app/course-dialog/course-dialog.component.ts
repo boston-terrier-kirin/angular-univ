@@ -33,9 +33,6 @@ export class CourseDialogComponent implements AfterViewInit {
       releasedAt: [moment(), Validators.required],
       longDescription: [course.longDescription, Validators.required],
     });
-
-    // app.component.htmlに定義したloadingとつながっていないので、app.component.htmlのloadingは呼び出せない。
-    this.loadingService.loadingOn();
   }
 
   ngAfterViewInit() {}
@@ -43,8 +40,10 @@ export class CourseDialogComponent implements AfterViewInit {
   save() {
     const changes = this.form.value;
 
-    this.coursesService
-      .saveCourse(this.course.id, changes)
+    const saveCourse$ = this.coursesService.saveCourse(this.course.id, changes);
+
+    this.loadingService
+      .showLoaderUntilComplete(saveCourse$)
       .subscribe((course) => {
         // ダイアログをClOSEボタンで閉じたのかSAVEボタンで閉じたのか区別がつくようにするために、
         // closeにcourseを渡す。
