@@ -15,19 +15,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  MatMomentDateModule,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +34,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     HomeComponent,
     CourseDialogComponent,
     CoursesCardListComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +56,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatMomentDateModule,
     MatSelectModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ja-JP' }],
   bootstrap: [AppComponent],

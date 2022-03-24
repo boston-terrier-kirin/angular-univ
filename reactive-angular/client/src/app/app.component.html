@@ -5,12 +5,10 @@
         <mat-icon>library_books</mat-icon>
         <span>Courses</span>
       </a>
-
       <a mat-list-item routerLink="/search-lessons">
         <mat-icon>search</mat-icon>
         <span>Search Lessons</span>
       </a>
-
       <a mat-list-item routerLink="about">
         <mat-icon>question_answer</mat-icon>
         <span>About</span>
@@ -19,12 +17,10 @@
         <mat-icon>person_add</mat-icon>
         <span>Register</span>
       </a>
-
       <a mat-list-item routerLink="login">
         <mat-icon>account_circle</mat-icon>
         <span>Login</span>
       </a>
-
       <a mat-list-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Logout</span>
@@ -37,10 +33,9 @@
       <button mat-icon-button (click)="start.open('mouse')">
         <mat-icon>menu</mat-icon>
       </button>
-
       <div class="filler"></div>
     </div>
   </mat-toolbar>
-
+  <loading></loading>
   <router-outlet></router-outlet>
 </mat-sidenav-container>
