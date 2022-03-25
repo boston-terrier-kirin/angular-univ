@@ -9,6 +9,10 @@ interface CoursesResponse {
   [payload: string]: Course[];
 }
 
+interface CourseLessonsResponse {
+  [payload: string]: Lesson[];
+}
+
 interface LessonsResponse {
   [payload: string]: Lesson[];
 }
@@ -23,6 +27,26 @@ export class CoursesService {
     return this.httpClient
       .get<CoursesResponse>('/api/courses')
       .pipe(map((res) => res['payload']));
+  }
+
+  loadCourseById(courseId: string): Observable<Course> {
+    return this.httpClient
+      .get<Course>(`/api/courses/${courseId}`)
+      .pipe(shareReplay());
+  }
+
+  loadAllCourseLessons(courseId: string): Observable<Lesson[]> {
+    return this.httpClient
+      .get<CourseLessonsResponse>(`/api/lessons`, {
+        params: {
+          courseId,
+          pageSize: '10000',
+        },
+      })
+      .pipe(
+        map((res) => res['payload']),
+        shareReplay()
+      );
   }
 
   saveCourse(courseId: string, changes: Partial<Course>): Observable<Course> {

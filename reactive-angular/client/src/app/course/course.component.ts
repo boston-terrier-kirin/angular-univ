@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Course } from '../model/course';
 import { Lesson } from '../model/lesson';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'course',
@@ -9,10 +11,19 @@ import { Lesson } from '../model/lesson';
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
-  course: Course | null = null;
-  lessons: Lesson[] = [];
+  course$ = new Observable<Course>();
+  lessons$ = new Observable<Lesson[]>();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private coursesService: CoursesService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const courseId = this.route.snapshot.paramMap.get('courseId');
+    if (courseId) {
+      this.course$ = this.coursesService.loadCourseById(courseId);
+      this.lessons$ = this.coursesService.loadAllCourseLessons(courseId);
+    }
+  }
 }
