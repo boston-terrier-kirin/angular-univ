@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
+import { LoadingService } from '../loading/loading.service';
 import { Course } from '../model/course';
 import { Lesson } from '../model/lesson';
 import { CoursesService } from '../services/courses.service';
@@ -21,6 +22,7 @@ export class CourseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private loadingService: LoadingService,
     private coursesService: CoursesService
   ) {}
 
@@ -39,7 +41,10 @@ export class CourseComponent implements OnInit {
         startWith([])
       );
 
-      this.data$ = combineLatest([course$, lessons$]).pipe(
+      const loadLessons$ =
+        this.loadingService.showLoaderUntilComplete<Lesson[]>(lessons$);
+
+      this.data$ = combineLatest([course$, loadLessons$]).pipe(
         // combineLatestで2つを束ねているが、combineLatestは両方の最新レスポンスを待ってしまう。
         // startWithで初期値を持たせることで解決する。
         map(([course, lessons]) => {
