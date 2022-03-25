@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingService } from './loading/loading.service';
 import { MessagesService } from './messages/messages.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,9 @@ import { MessagesService } from './messages/messages.service';
   providers: [LoadingService, MessagesService],
 })
 export class AppComponent {
-  logout() {}
+  constructor(public authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 }
