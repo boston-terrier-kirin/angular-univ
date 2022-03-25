@@ -30,6 +30,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
+import { LessonComponent } from './lesson/lesson.component';
+import { SearchLessonsComponent } from './search-lessons/search-lessons.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { LoginComponent } from './login/login.component';
     MessagesComponent,
     AboutComponent,
     LoginComponent,
+    LessonComponent,
+    SearchLessonsComponent,
   ],
   imports: [
     BrowserModule,

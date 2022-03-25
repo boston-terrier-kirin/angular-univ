@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { SearchLessonsComponent } from './search-lessons/search-lessons.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'search-lessons',
+    component: SearchLessonsComponent,
   },
   {
     path: 'about',
@@ -17,10 +22,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: '**',
-    redirectTo: '/',
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: '/',
+  // },
 ];
 
 @NgModule({
