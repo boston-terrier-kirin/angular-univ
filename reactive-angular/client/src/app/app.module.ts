@@ -32,6 +32,7 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { LessonComponent } from './lesson/lesson.component';
 import { SearchLessonsComponent } from './search-lessons/search-lessons.component';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SearchLessonsComponent } from './search-lessons/search-lessons.componen
     LoginComponent,
     LessonComponent,
     SearchLessonsComponent,
+    CourseComponent,
   ],
   imports: [
     BrowserModule,
