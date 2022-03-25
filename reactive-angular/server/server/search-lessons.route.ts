@@ -7,22 +7,19 @@ export function searchLessons(req: Request, res: Response) {
 
   const courseId = queryParams.courseId,
     filter = queryParams.filter || '',
-    sortOrder = queryParams.sortOrder,
+    sortOrder = queryParams.sortOrder || 'asc',
     pageNumber = parseInt(queryParams.pageNumber) || 0,
-    pageSize = parseInt(queryParams.pageSize),
-    sortColumn = queryParams.sortColumn ?? 'seqNo';
+    pageSize = parseInt(queryParams.pageSize) || 3;
 
-  let lessons = Object.values(LESSONS)
-    .filter((lesson) => lesson.courseId == courseId)
-    .sort((l1, l2) => {
-      if (l1[sortColumn] > l2[sortColumn]) {
-        return 1;
-      } else if (l1[sortColumn] < l2[sortColumn]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
+  let lessons;
+
+  if (courseId) {
+    lessons = Object.values(LESSONS)
+      .filter((lesson) => lesson.courseId == courseId)
+      .sort((l1, l2) => l1.id - l2.id);
+  } else {
+    lessons = Object.values(LESSONS);
+  }
 
   if (filter) {
     lessons = lessons.filter(

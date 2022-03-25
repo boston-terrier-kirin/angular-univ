@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course, sortCoursesBySeqNo } from '../model/course';
-import { CoursesService } from '../services/Courses.service';
+import { CoursesService } from '../services/courses.service';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { LoadingService } from '../loading/loading.service';

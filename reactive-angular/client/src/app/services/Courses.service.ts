@@ -3,9 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Course } from '../model/course';
+import { Lesson } from '../model/lesson';
 
 interface CoursesResponse {
   [payload: string]: Course[];
+}
+
+interface LessonsResponse {
+  [payload: string]: Lesson[];
 }
 
 @Injectable({
@@ -24,5 +29,19 @@ export class CoursesService {
     return this.httpClient
       .put<Course>(`/api/courses/${courseId}`, changes)
       .pipe(shareReplay());
+  }
+
+  searchLessons(search: string): Observable<Lesson[]> {
+    return this.httpClient
+      .get<LessonsResponse>('/api/lessons', {
+        params: {
+          filter: search,
+          pageSize: '100',
+        },
+      })
+      .pipe(
+        map((res) => res['payload']),
+        shareReplay()
+      );
   }
 }

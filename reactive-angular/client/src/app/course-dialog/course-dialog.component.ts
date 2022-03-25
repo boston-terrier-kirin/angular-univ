@@ -5,7 +5,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 import { Course } from '../model/course';
-import { CoursesService } from '../services/Courses.service';
+import { CoursesService } from '../services/courses.service';
 import { LoadingService } from '../loading/loading.service';
 import { MessagesService } from '../messages/messages.service';
 
