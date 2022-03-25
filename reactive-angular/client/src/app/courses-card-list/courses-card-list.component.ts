@@ -37,6 +37,8 @@ export class CoursesCardListComponent implements OnInit {
         tap((value) => {
           // ダイアログをCLOSEボタンで閉じた場合はここまで来ないので、emitされない。
           console.log('CoursesCardListComponent.afterClosed -> tap', value);
+
+          // ここでemitして、home.component.htmlで (coursesChange)="reloadCourses()" する。
           this.coursesChange.emit();
         })
       )
