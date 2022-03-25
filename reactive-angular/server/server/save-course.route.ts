@@ -17,11 +17,11 @@ export function saveCourse(req: Request, res: Response) {
 
   console.log('new course version', newCourse);
 
-  setTimeout(() => {
-    res.status(200).json(COURSES[id]);
-  }, 2000);
-
   // setTimeout(() => {
-  //   res.status(500).json({ message: 'エラー' });
-  // }, 3000);
+  //   res.status(200).json(COURSES[id]);
+  // }, 2000);
+
+  setTimeout(() => {
+    res.status(500).json({ message: 'エラー' });
+  }, 3000);
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Course, sortCoursesBySeqNo } from '../model/course';
-import { CoursesService } from '../services/Courses.service';
+import { CoursesService } from '../services/courses.service';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { LoadingService } from '../loading/loading.service';
 import { MessagesService } from '../messages/messages.service';
+import { CoursesStoreService } from '../services/courses.store.service';
 
 @Component({
   selector: 'home',
@@ -15,43 +16,17 @@ export class HomeComponent implements OnInit {
   beginnerCourses$: Observable<Course[]> = new Observable();
   advancedCourses$: Observable<Course[]> = new Observable();
 
-  constructor(
-    private coursesService: CoursesService,
-    private loadingService: LoadingService,
-    private messagesService: MessagesService
-  ) {}
+  constructor(private coursesStoreService: CoursesStoreService) {}
 
   ngOnInit() {
     this.reloadCourses();
   }
 
   reloadCourses() {
-    const courses$ = this.coursesService.loadAllCourses().pipe(
-      // beginnerCourses$とadvancedCourses$の両方でsubscribeしているので2回リクエストが流れるのを、shareReplayで防ぐ。
-      shareReplay(),
-      map((courses) => courses.sort(sortCoursesBySeqNo)),
-      catchError((err) => {
-        const message = 'Could not load courses';
-        this.messagesService.showErrors(message);
+    this.beginnerCourses$ =
+      this.coursesStoreService.filterByCategory('BEGINNER');
 
-        // throwErrorで元のobservableを置き換える。
-        return throwError(() => new Error(err));
-      })
-    );
-
-    const loadCourses$ =
-      this.loadingService.showLoaderUntilComplete<Course[]>(courses$);
-
-    this.beginnerCourses$ = loadCourses$.pipe(
-      map((courses) =>
-        courses.filter((course) => course.category === 'BEGINNER')
-      )
-    );
-
-    this.advancedCourses$ = loadCourses$.pipe(
-      map((courses) =>
-        courses.filter((course) => course.category === 'ADVANCED')
-      )
-    );
+    this.advancedCourses$ =
+      this.coursesStoreService.filterByCategory('ADVANCED');
   }
 }

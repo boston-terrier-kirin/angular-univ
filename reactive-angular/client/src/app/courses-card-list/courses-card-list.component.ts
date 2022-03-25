@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { filter, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 import { Course } from '../model/course';
 
@@ -11,7 +11,6 @@ import { Course } from '../model/course';
 })
 export class CoursesCardListComponent implements OnInit {
   @Input() courses: Course[] | null = [];
-  @Output() coursesChange = new EventEmitter();
 
   constructor(private dialog: MatDialog) {}
 
@@ -33,11 +32,6 @@ export class CoursesCardListComponent implements OnInit {
           // ダイアログをCLOSEボタンで閉じた場合、undefinedが返ってくるので、!!valueでフィルタして、emitされないようにする。
           console.log('CoursesCardListComponent.afterClosed -> filter', value);
           return !!value;
-        }),
-        tap((value) => {
-          // ダイアログをCLOSEボタンで閉じた場合はここまで来ないので、emitされない。
-          console.log('CoursesCardListComponent.afterClosed -> tap', value);
-          this.coursesChange.emit();
         })
       )
       .subscribe();

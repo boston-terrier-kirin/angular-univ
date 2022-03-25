@@ -29,6 +29,8 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
 import { LoadingComponent } from './loading/loading.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AboutComponent } from './about/about.component';
+import { LoadingService } from './loading/loading.service';
+import { MessagesService } from './messages/messages.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,11 @@ import { AboutComponent } from './about/about.component';
     MatInputModule,
     MatProgressSpinnerModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ja-JP' }],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
+    LoadingService,
+    MessagesService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
