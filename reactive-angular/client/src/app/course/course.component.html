@@ -2,7 +2,7 @@
   <div class="course">
     <h2>{{ data.course?.description }}</h2>
     <img class="course-thumbnail" [src]="data.course?.iconUrl" />
-    <table class="lessons-table mat-elevation-z3">
+    <table class="lessons-table mat-elevation-z3" *ngIf="data.lessons.length">
       <thead>
         <th>#</th>
         <th>Description</th>
