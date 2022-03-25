@@ -10,7 +10,7 @@ export function getAllCourses(req: Request, res: Response) {
         (c1: any, c2: any) => c1.seqNo - c2.seqNo
       ),
     });
-  }, 2500);
+  }, 1000);
 }
 
 export function getCourseById(req: Request, res: Response) {
