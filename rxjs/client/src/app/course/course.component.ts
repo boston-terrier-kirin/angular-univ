@@ -8,7 +8,12 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../model/course';
 import { concat, fromEvent, switchMap, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  startWith,
+} from 'rxjs/operators';
 import { Lesson } from '../model/lesson';
 import { createHttpObservable } from '../common/util';
 
@@ -32,17 +37,15 @@ export class CourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // 検索初期値
-    const initialLessons$ = this.loadLessons();
-
-    // インクリメンタルサーチ
-    const searchLessons$ = fromEvent<InputEvent>(
+    this.lessons$ = fromEvent<InputEvent>(
       this.input.nativeElement,
       'keyup'
     ).pipe(
       map((event: Event) => {
         return (event.target as HTMLInputElement).value;
       }),
+      // startWith('')で検索条件初期値を設定しても同じことができる。
+      startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((search) => {
@@ -50,10 +53,31 @@ export class CourseComponent implements OnInit, AfterViewInit {
         return this.loadLessons(search);
       })
     );
-
-    // 2つの結果をconcat
-    this.lessons$ = concat(initialLessons$, searchLessons$);
   }
+
+  // ngAfterViewInit() {
+  //   // 検索初期値
+  //   const initialLessons$ = this.loadLessons();
+
+  //   // インクリメンタルサーチ
+  //   const searchLessons$ = fromEvent<InputEvent>(
+  //     this.input.nativeElement,
+  //     'keyup'
+  //   ).pipe(
+  //     map((event: Event) => {
+  //       return (event.target as HTMLInputElement).value;
+  //     }),
+  //     debounceTime(400),
+  //     distinctUntilChanged(),
+  //     switchMap((search) => {
+  //       // switchMapは後勝ち。検索がかぶったら、キャンセルして新しいリクエストを出す。
+  //       return this.loadLessons(search);
+  //     })
+  //   );
+
+  //   // 2つの結果をconcat
+  //   this.lessons$ = concat(initialLessons$, searchLessons$);
+  // }
 
   loadLessons(search = ''): Observable<Lesson[]> {
     return createHttpObservable(
