@@ -36,6 +36,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     this.course$ = createHttpObservable(`/api/courses/${this.courseId}`);
   }
 
+  // VERSION2
   ngAfterViewInit() {
     this.lessons$ = fromEvent<InputEvent>(
       this.input.nativeElement,
@@ -55,10 +56,11 @@ export class CourseComponent implements OnInit, AfterViewInit {
     );
   }
 
+  // VERSION1
   // ngAfterViewInit() {
   //   // 検索初期値
   //   const initialLessons$ = this.loadLessons();
-
+  //
   //   // インクリメンタルサーチ
   //   const searchLessons$ = fromEvent<InputEvent>(
   //     this.input.nativeElement,
@@ -74,7 +76,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
   //       return this.loadLessons(search);
   //     })
   //   );
-
+  //
   //   // 2つの結果をconcat
   //   this.lessons$ = concat(initialLessons$, searchLessons$);
   // }
