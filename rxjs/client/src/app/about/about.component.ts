@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, timer } from 'rxjs';
+import { concat, fromEvent, interval, of, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createHttpObservable } from '../common/util';
 import { Course } from '../model/course';
@@ -16,7 +16,18 @@ interface CoursesResponse {
 export class AboutComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  concat() {
+    const one$ = of(1, 2, 3);
+    const two$ = of(4, 5, 6);
+
+    concat(one$, two$).subscribe((values) => {
+      console.log(values);
+    });
+  }
+
+  courses() {
     const courses$ = createHttpObservable<CoursesResponse>('/api/courses').pipe(
       map((res) => res['payload'])
     );
