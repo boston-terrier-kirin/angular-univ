@@ -11,14 +11,7 @@ import { Course } from '../model/course';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { from } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import {
-  filter,
-  concatMap,
-  mergeMap,
-  switchMap,
-  exhaustMap,
-} from 'rxjs/operators';
+import { filter, concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'course-dialog',
