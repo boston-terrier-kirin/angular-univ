@@ -9,7 +9,7 @@ import { CourseDialogComponent } from '../course-dialog/course-dialog.component'
   styleUrls: ['./courses-card-list.component.css'],
 })
 export class CoursesCardListComponent implements OnInit {
-  @Input() courses: Course[] = [];
+  @Input() courses: Course[] | null = [];
 
   constructor(private dialog: MatDialog) {}
 

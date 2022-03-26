@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, Observable, timer } from 'rxjs';
+import { fromEvent, interval, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { createHttpObservable } from '../common/util';
 import { Course } from '../model/course';
 
 interface CoursesResponse {
@@ -16,27 +17,13 @@ export class AboutComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    const http$ = new Observable<CoursesResponse>((subscriber) => {
-      fetch('/api/courses')
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          subscriber.next(json);
-          subscriber.complete();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }).pipe(
-      map((courses) => {
-        return courses['payload'];
-      })
+    const courses$ = createHttpObservable<CoursesResponse>('/api/courses').pipe(
+      map((res) => res['payload'])
     );
 
-    http$.subscribe({
-      next: (value) => {
-        console.log('next', value);
+    courses$.subscribe({
+      next: (courses) => {
+        console.log('next', courses);
       },
       error: (err) => {
         console.log(err);
