@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { concat, fromEvent, interval, merge, of, timer } from 'rxjs';
+import {
+  BehaviorSubject,
+  concat,
+  fromEvent,
+  interval,
+  merge,
+  of,
+  Subject,
+  timer,
+} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createHttpObservable } from '../common/util';
 import { Course } from '../model/course';
@@ -17,6 +26,44 @@ export class AboutComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  behaviorSubject() {
+    const subject = new BehaviorSubject(0);
+    const value$ = subject.asObservable();
+    value$.subscribe((value) => {
+      console.log('nextする前にsubscribe', value);
+    });
+
+    subject.next(1);
+    subject.next(2);
+    subject.next(3);
+
+    setTimeout(() => {
+      value$.subscribe((value) => {
+        // 最後の値が取得できる。
+        console.log('nextした後にsubscribe', value);
+      });
+    }, 5000);
+  }
+
+  subject() {
+    const subject = new Subject();
+    const value$ = subject.asObservable();
+    value$.subscribe((value) => {
+      console.log('nextする前にsubscribe', value);
+    });
+
+    subject.next(1);
+    subject.next(2);
+    subject.next(3);
+
+    setTimeout(() => {
+      value$.subscribe((value) => {
+        // これは呼ばれない
+        console.log('nextした後にsubscribe', value);
+      });
+    }, 5000);
+  }
 
   merge() {
     const one$ = interval(1000);
