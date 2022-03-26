@@ -16,6 +16,7 @@ import {
 } from 'rxjs/operators';
 import { Lesson } from '../model/lesson';
 import { createHttpObservable } from '../common/util';
+import { debug } from '../common/debug';
 
 @Component({
   selector: 'course',
@@ -33,7 +34,9 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.courseId = this.route.snapshot.params['id'];
-    this.course$ = createHttpObservable(`/api/courses/${this.courseId}`);
+    this.course$ = createHttpObservable(`/api/courses/${this.courseId}`).pipe(
+      debug('course')
+    );
   }
 
   // VERSION2

@@ -3,6 +3,35 @@
 ## CourseComponent
 
 ```ts
+  // VERSION2
+  ngAfterViewInit() {
+    this.lessons$ = fromEvent<InputEvent>(
+      this.input.nativeElement,
+      'keyup'
+    ).pipe(
+      map((event: Event) => {
+        return (event.target as HTMLInputElement).value;
+      }),
+      // startWith('')で検索条件初期値を設定しても同じことができる。
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((search) => {
+        // switchMapは後勝ち。検索がかぶったら、キャンセルして新しいリクエストを出す。
+        return this.loadLessons(search);
+      })
+    );
+  }
+
+  loadLessons(search = ''): Observable<Lesson[]> {
+    return createHttpObservable(
+      `/api/lessons?courseId=${this.courseId}&pageSize=100&filter=${search}`
+    ).pipe(map((res: any) => res['payload']));
+  }
+```
+
+```ts
+  // VERSION1
   ngAfterViewInit() {
     // 検索初期値
     const initialLessons$ = this.loadLessons();
