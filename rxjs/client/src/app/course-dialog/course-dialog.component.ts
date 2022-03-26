@@ -11,7 +11,8 @@ import { Course } from '../model/course';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { from } from 'rxjs';
-import { filter, concatMap, switchMap } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
+import { filter, concatMap, mergeMap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'course-dialog',
@@ -50,6 +51,10 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
           // concatMapを使っているので、順番に前回のリクエストが終わるのを待ってfetchする
           return this.saveCourse(changes);
         })
+        // switchMap((changes) => {
+        //   // switchMapを使うと後勝ちになって、1回目がキャンセルされて2回目が実行される。
+        //   return ajax.getJSON('/api/courses/1');
+        // })
       )
       .subscribe();
   }
