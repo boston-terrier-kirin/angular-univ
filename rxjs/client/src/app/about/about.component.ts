@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concat, fromEvent, interval, of, timer } from 'rxjs';
+import { concat, fromEvent, interval, merge, of, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createHttpObservable } from '../common/util';
 import { Course } from '../model/course';
@@ -17,6 +17,15 @@ export class AboutComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  merge() {
+    const one$ = interval(1000);
+    const two$ = one$.pipe(map((value) => value * 10));
+
+    merge(one$, two$).subscribe((values) => {
+      console.log(values);
+    });
+  }
 
   concat() {
     const one$ = of(1, 2, 3);
