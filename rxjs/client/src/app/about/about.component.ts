@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, interval, timer } from 'rxjs';
+import { fromEvent, interval, Observable, timer } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Course } from '../model/course';
+
+interface CoursesResponse {
+  [payload: string]: Course[];
+}
 
 @Component({
   selector: 'about',
@@ -10,7 +16,35 @@ export class AboutComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.fromEvent();
+    const http$ = new Observable<CoursesResponse>((subscriber) => {
+      fetch('/api/courses')
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          subscriber.next(json);
+          subscriber.complete();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }).pipe(
+      map((courses) => {
+        return courses['payload'];
+      })
+    );
+
+    http$.subscribe({
+      next: (value) => {
+        console.log('next', value);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+    });
   }
 
   interval() {
@@ -32,8 +66,16 @@ export class AboutComponent implements OnInit {
 
   fromEvent() {
     const e$ = fromEvent(document, 'click');
-    e$.subscribe((value) => {
-      console.log(value);
+    e$.subscribe({
+      next: (value) => {
+        console.log(value);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log('complete');
+      },
     });
   }
 }
