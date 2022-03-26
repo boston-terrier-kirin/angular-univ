@@ -15,6 +15,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -52,12 +55,13 @@ import { HomeComponent } from './home/home.component';
     MatTabsModule,
     MatCardModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatSelectModule,
     MatInputModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ja-JP' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
