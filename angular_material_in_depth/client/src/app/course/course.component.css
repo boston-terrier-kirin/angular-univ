@@ -10,6 +10,54 @@
   display: block;
 }
 
+.spinner-container {
+  height: 360px;
+  width: 390px;
+  position: fixed;
+}
+
+.spinner-container mat-spinner {
+  margin: 130px auto 0 auto;
+}
+
+.lessons-table {
+  min-height: 360px;
+  margin-top: 10px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lessons-table tr:hover {
+  background: whitesmoke;
+  cursor: pointer;
+}
+
+/** 
+ * mat-tabelがCSSをつけてくれているので、それを使ってスタイルを適用する。
+ */
+.lessons-table th {
+  background: whitesmoke;
+}
+.mat-column-seqNo {
+  width: 50px;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-description {
+  padding-left: 20px;
+  text-align: left;
+}
+.mat-column-duration {
+  font-style: italic;
+}
+
+mat-paginator {
+  width: 400px;
+  margin-bottom: 200px;
+}
+
+/* 使っていないはず
 .description-cell {
   text-align: left;
   margin: 10px auto;
@@ -23,48 +71,4 @@
   display: inline-block;
   vertical-align: middle;
   font-size: 20px;
-}
-
-.spinner-container {
-  height: 360px;
-  width: 390px;
-  position: fixed;
-}
-
-.lessons-table {
-  min-height: 360px;
-  margin-top: 10px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-tr:hover {
-  background: whitesmoke;
-  cursor: pointer;
-}
-
-mat-paginator {
-  width: 400px;
-  margin-bottom: 200px;
-}
-
-.spinner-container mat-spinner {
-  margin: 130px auto 0 auto;
-}
-
-.mat-column-seqNo {
-  width: 32px;
-  border-right: 1px solid black;
-  padding-right: 24px;
-  text-align: center;
-}
-
-.mat-column-description {
-  padding-left: 20px;
-  text-align: left;
-}
-
-.mat-column-duration {
-  font-style: italic;
-}
+} */
