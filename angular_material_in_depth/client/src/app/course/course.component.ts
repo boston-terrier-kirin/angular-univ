@@ -96,7 +96,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     private coursesService: CoursesService
   ) {}
 
-  displayedColumns = ['seqNo', 'title', 'duration'];
+  displayedColumns = ['seqNo', 'description', 'duration'];
 
   ngOnInit() {
     this.course = this.route.snapshot.data['course'];
