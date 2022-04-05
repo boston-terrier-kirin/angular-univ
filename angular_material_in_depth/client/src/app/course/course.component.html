@@ -1,6 +1,7 @@
 <div class="course">
   <h2>{{ course?.description }}</h2>
   <img class="course-thumbnail mat-elevation-z8" [src]="course?.iconUrl" />
+  <mat-spinner *ngIf="loading" class="spinner-container"></mat-spinner>
 </div>
 
 <table mat-table [dataSource]="lessons" class="lessons-table">

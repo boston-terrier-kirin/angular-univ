@@ -25,6 +25,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
@@ -68,6 +69,7 @@ import { CourseComponent } from './course/course.component';
     MatCheckboxModule,
     MatTooltipModule,
     MatTableModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
