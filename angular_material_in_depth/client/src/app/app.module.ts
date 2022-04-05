@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
@@ -62,6 +63,7 @@ import { CreateCourseStepTwoComponent } from './create-course/create-course-step
     MatDatepickerModule,
     MatMomentDateModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
