@@ -4,6 +4,10 @@
 }
 
 .course-type {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 18.5px;
+  margin-bottom: 18.5px;
+}
+
+mat-radio-button {
+  margin-right: 1rem;
 }

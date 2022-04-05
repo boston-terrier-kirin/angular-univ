@@ -1,1 +1,23 @@
-<div [formGroup]="form" class="course-details-form"></div>
+<div [formGroup]="form" class="course-details-form">
+  <mat-form-field floatLabel="auto">
+    <input formControlName="title" matInput placeholder="Course title" />
+    <mat-hint align="end">50文字以内</mat-hint>
+    <mat-error *ngIf="form.controls['title'].errors?.['required']"
+      >Value is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- radio自体の高さが20.3なので、margin-top/bottom に18.5を足して、20.3+18.5+18.5=57.3。これで form-fieldの高さ57.31とほぼ同じになる。 -->
+  <mat-radio-group class="course-type" formControlName="courseType">
+    <mat-radio-button value="free">Free</mat-radio-button>
+    <mat-radio-button value="premium">Premium</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <mat-select formControlName="category" placeholder="Select category">
+      <mat-option value="beginner">Beginner</mat-option>
+      <mat-option value="intermediate">Intermediate</mat-option>
+      <mat-option value="advanced">Advanced</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
