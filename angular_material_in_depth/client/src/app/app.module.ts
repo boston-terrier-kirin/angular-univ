@@ -24,6 +24,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
@@ -64,6 +65,7 @@ import { CreateCourseStepTwoComponent } from './create-course/create-course-step
     MatMomentDateModule,
     MatCheckboxModule,
     MatTooltipModule,
+    MatTableModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
