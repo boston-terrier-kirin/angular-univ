@@ -19,6 +19,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
@@ -55,8 +58,23 @@ import { CreateCourseStepTwoComponent } from './create-course/create-course-step
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        display: {
+          dateInput: 'L',
+          monthYearLabel: 'YYYY年MMM',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'YYYY年MMMM',
+        },
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
