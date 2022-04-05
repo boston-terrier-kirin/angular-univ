@@ -36,7 +36,7 @@ export class CoursesService {
     courseId: number,
     sortOrder = 'asc',
     pageNumber = 0,
-    pageSize = 3,
+    pageSize = 5,
     sortColumn = 'seqNo'
   ): Observable<Lesson[]> {
     return this.http
