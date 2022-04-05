@@ -3,11 +3,14 @@
   flex-direction: column;
 }
 
-.course-type {
-  margin-top: 18.5px;
+mat-radio-group {
   margin-bottom: 18.5px;
 }
 
 mat-radio-button {
   margin-right: 1rem;
+}
+
+mat-checkbox {
+  margin-bottom: 18.5px;
 }

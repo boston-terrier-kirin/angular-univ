@@ -14,7 +14,7 @@ export class CreateCourseStepOneComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(5), Validators.maxLength(60)],
     ],
-    releasedAt: [moment(), Validators.required],
+    releasedAt: [null, Validators.required],
     category: ['BEGINNER', Validators.required],
     courseType: ['premium', Validators.required],
     downloadsAllowed: [false, Validators.requiredTrue],

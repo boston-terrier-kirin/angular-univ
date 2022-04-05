@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="course-details-form">
-  <mat-form-field floatLabel="always">
+  <mat-form-field floatLabel="auto">
     <input formControlName="title" matInput placeholder="Course Title" />
     <mat-hint align="end">50文字以内</mat-hint>
     <mat-error *ngIf="form.controls['title'].errors?.['required']"
@@ -7,13 +7,13 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- radio自体の高さが20.3なので、margin-top/bottom に18.5を足して、20.3+18.5+18.5=57.3。これで form-fieldの高さ57.31とほぼ同じになる。 -->
-  <mat-radio-group class="course-type" formControlName="courseType">
+  <!-- radio自体の高さ + margin-bottom: 18.5px -->
+  <mat-radio-group formControlName="courseType">
     <mat-radio-button value="free">Free</mat-radio-button>
     <mat-radio-button value="premium">Premium</mat-radio-button>
   </mat-radio-group>
 
-  <mat-form-field floatLabel="always">
+  <mat-form-field floatLabel="auto">
     <mat-select formControlName="category" placeholder="Select Category">
       <mat-option value="beginner">Beginner</mat-option>
       <mat-option value="intermediate">Intermediate</mat-option>
@@ -21,7 +21,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field floatLabel="always">
+  <mat-form-field floatLabel="auto">
     <input
       matInput
       formControlName="releasedAt"
@@ -34,4 +34,9 @@
     ></mat-datepicker-toggle>
     <mat-datepicker #releasedAtPicker></mat-datepicker>
   </mat-form-field>
+
+  <!-- checkbox自体の高さ + margin-bottom: 18.5px -->
+  <mat-checkbox formControlName="downloadsAllowed"
+    >Downloads Allowed?</mat-checkbox
+  >
 </div>
