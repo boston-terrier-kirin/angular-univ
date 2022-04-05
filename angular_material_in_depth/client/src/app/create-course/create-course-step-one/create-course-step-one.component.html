@@ -1,6 +1,7 @@
 <div [formGroup]="form" class="course-details-form">
-  <mat-form-field floatLabel="always">
-    <input formControlName="title" matInput placeholder="Course Title" />
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Course Title</mat-label>
+    <input formControlName="title" matInput />
     <mat-hint align="end">50文字以内</mat-hint>
     <mat-error *ngIf="form.controls['title'].errors?.['required']"
       >Value is required
@@ -13,19 +14,20 @@
     <mat-radio-button value="premium">Premium</mat-radio-button>
   </mat-radio-group>
 
-  <mat-form-field floatLabel="always">
-    <mat-select formControlName="category" placeholder="Select Category">
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Select Category</mat-label>
+    <mat-select formControlName="category">
       <mat-option value="beginner">Beginner</mat-option>
       <mat-option value="intermediate">Intermediate</mat-option>
       <mat-option value="advanced">Advanced</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field floatLabel="always">
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Release Date</mat-label>
     <input
       matInput
       formControlName="releasedAt"
-      placeholder="Release Date"
       [matDatepicker]="releasedAtPicker"
     />
     <mat-datepicker-toggle
@@ -39,4 +41,9 @@
   <mat-checkbox formControlName="downloadsAllowed"
     >Downloads Allowed?</mat-checkbox
   >
+
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="longDescription"></textarea>
+  </mat-form-field>
 </div>
