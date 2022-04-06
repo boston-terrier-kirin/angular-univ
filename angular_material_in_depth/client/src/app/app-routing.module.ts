@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CourseComponent } from './course/course.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { HomeComponent } from './home/home.component';
 import { CourseResolver } from './services/course.resolver';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
     resolve: {
       course: CourseResolver,
     },
+  },
+  {
+    path: 'drag-drop-example',
+    component: DragDropComponent,
   },
 ];
 
