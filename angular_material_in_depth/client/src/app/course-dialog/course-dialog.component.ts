@@ -43,10 +43,14 @@ export class CourseDialogComponent implements OnInit {
 
 export function openEditCourseDialog(dialog: MatDialog, course: Course) {
   const config = new MatDialogConfig();
-  // config.disableCloseでオーバーレイをクリックすると閉じるようにできる。
-  // config.disableClose = true;
+  // config.disableClose = falseでオーバーレイをクリックすると閉じるようにできる。
+  config.disableClose = false;
   config.autoFocus = true;
+  // modal-panel はstyle.cssに定義しないとdialogに反映されない。
+  config.panelClass = 'modal-panel';
   config.data = { ...course };
+
+  // config.backdropClass = ""
 
   const dialogRef = dialog.open(CourseDialogComponent, config);
   return dialogRef.afterClosed();

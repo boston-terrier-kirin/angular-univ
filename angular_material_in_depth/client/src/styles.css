@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media screen and (max-width: 959px) {
+  .modal-panel {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .modal-panel .mat-dialog-container {
+    border-radius: 0;
+    padding: 14px !important;
+  }
+}
