@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs/operators';
@@ -12,9 +13,42 @@ import { Course } from '../model/course';
 export class CoursesCardListComponent implements OnInit {
   @Input() courses?: Course[] | null = [];
 
-  constructor(private dialog: MatDialog) {}
+  cols = 3;
+  rowHeight = '500px';
 
-  ngOnInit(): void {}
+  constructor(
+    private dialog: MatDialog,
+    private responsive: BreakpointObserver
+  ) {}
+
+  ngOnInit(): void {
+    this.responsive
+      .observe([
+        Breakpoints.TabletPortrait,
+        Breakpoints.TabletLandscape,
+        Breakpoints.HandsetPortrait,
+        Breakpoints.HandsetLandscape,
+      ])
+      .subscribe((result) => {
+        console.log(result);
+        const breakPoints = result.breakpoints;
+
+        this.cols = 3;
+        this.rowHeight = '500px';
+
+        if (breakPoints[Breakpoints.TabletPortrait]) {
+          this.cols = 1;
+        } else if (breakPoints[Breakpoints.TabletLandscape]) {
+          this.cols = 2;
+          this.rowHeight = '430px';
+        } else if (breakPoints[Breakpoints.HandsetPortrait]) {
+          this.cols = 1;
+        } else if (breakPoints[Breakpoints.HandsetLandscape]) {
+          this.cols = 1;
+          this.rowHeight = '430px';
+        }
+      });
+  }
 
   editCourse(course: Course) {
     openEditCourseDialog(this.dialog, course)
