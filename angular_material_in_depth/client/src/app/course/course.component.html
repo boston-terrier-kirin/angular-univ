@@ -53,7 +53,7 @@
     <tr
       mat-row
       *matRowDef="let lesson; columns: ['expandedDetail']"
-      [class.collapsed-detail]="lesson != expandedLesson"
+      [ngClass]="{ 'collapsed-detail': lesson != expandedLesson }"
     ></tr>
   </table>
 
