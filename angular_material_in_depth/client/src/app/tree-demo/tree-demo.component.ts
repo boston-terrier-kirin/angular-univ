@@ -61,5 +61,20 @@ const TREE_DATA: CourseNode[] = [
   styleUrls: ['tree-demo.component.css'],
 })
 export class TreeDemoComponent implements OnInit {
-  ngOnInit() {}
+  nestedDataSource = new MatTreeNestedDataSource<CourseNode>();
+  nestedTreeControl = new NestedTreeControl<CourseNode>(
+    (node) => node.children
+  );
+
+  ngOnInit() {
+    this.nestedDataSource.data = TREE_DATA;
+  }
+
+  hasNestedChild(index: number, node: CourseNode): boolean {
+    const children = node.children?.length;
+    if (!children) {
+      return false;
+    }
+    return true;
+  }
 }

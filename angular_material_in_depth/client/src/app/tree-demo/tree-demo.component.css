@@ -1,8 +1,8 @@
 .tree-demo-container {
-  font-family: "Roboto";
+  /* font-family: "Roboto";
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
   padding: 30px;
 }
 
@@ -25,7 +25,7 @@
  * This padding sets alignment of the nested nodes.
  */
 .example-tree .mat-nested-tree-node .nested-node {
-  padding-left: 40px;
+  padding-left: 30px;
 }
 
 /*
@@ -34,5 +34,5 @@
  * under the same parent.
  */
 .example-tree .nested-node > .mat-tree-node {
-  padding-left: 40px;
+  padding-left: 30px;
 }
