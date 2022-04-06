@@ -41,6 +41,8 @@ import { CreateCourseStepTwoComponent } from './create-course/create-course-step
 import { CourseComponent } from './course/course.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { VirtualScrollingComponent } from './virtual-scrolling/virtual-scrolling.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
     CourseComponent,
     CourseDialogComponent,
     DragDropComponent,
+    TreeDemoComponent,
+    VirtualScrollingComponent,
   ],
   imports: [
     BrowserModule,
