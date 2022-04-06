@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute } from '@angular/router';
-import { throwError } from 'rxjs';
+import { merge, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { Course } from '../model/course';
 import { Lesson } from '../model/lesson';
@@ -17,6 +18,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
   lessons: Lesson[] = [];
   loading = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,12 +36,32 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // paginatorはngOnInitのタイミングでは初期化されていない。
+    // mergeを使ったバージョン
+    // merge(this.paginator.page, this.sort.sortChange)
+    //   .pipe(
+    //     tap(() => {
+    //       this.loadLessons();
+    //     })
+    //   )
+    //   .subscribe();
+
     this.paginator.page
       .pipe(
         tap(() => {
           // ページングを変えたタイミングでイベントがemitされるので、その都度検索しに行ける。
           console.log(`pageIndex: ${this.paginator.pageIndex}`);
           console.log(`pageSize: ${this.paginator.pageSize}`);
+          this.loadLessons();
+        })
+      )
+      .subscribe();
+
+    this.sort.sortChange
+      .pipe(
+        tap(() => {
+          console.log(`sort: ${this.sort.direction}`);
+          console.log(`sort: ${this.sort.active}`);
+          this.paginator.pageIndex = 0;
           this.loadLessons();
         })
       )
@@ -51,10 +73,11 @@ export class CourseComponent implements OnInit, AfterViewInit {
     this.coursesService
       .findLessons(
         this.course.id,
-        'asc',
-        // paginatorはngOnInitのタイミングでは初期化されていないので、デフォルト値を設定する。
+        // sort/paginatorはngOnInitのタイミングでは初期化されていないので、デフォルト値を設定する。
+        this.sort?.direction ?? 'asc',
         this.paginator?.pageIndex ?? 0,
-        this.paginator?.pageSize ?? 5
+        this.paginator?.pageSize ?? 5,
+        this.sort?.active ?? 'seqNo'
       )
       .pipe(
         catchError((err) => {
