@@ -32,6 +32,10 @@
   cursor: pointer;
 }
 
+.collapsed-detail {
+  display: none;
+}
+
 /** 
  * mat-tabelがCSSをつけてくれているので、それを使ってスタイルを適用する。
  */

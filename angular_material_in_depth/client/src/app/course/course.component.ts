@@ -20,12 +20,13 @@ export class CourseComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  displayedColumns = ['seqNo', 'description', 'duration'];
+  expandedLesson: Lesson | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService
   ) {}
-
-  displayedColumns = ['seqNo', 'description', 'duration'];
 
   ngOnInit() {
     this.course = this.route.snapshot.data['course'];
@@ -91,5 +92,15 @@ export class CourseComponent implements OnInit, AfterViewInit {
       .subscribe((lessons) => {
         this.lessons = lessons;
       });
+  }
+
+  toggleLesson(lesson: Lesson) {
+    if (lesson === this.expandedLesson) {
+      // lesson === this.expandedLesson ということは同じ行を2回クリックしたということなので、閉じる。
+      this.expandedLesson = null;
+      return;
+    }
+
+    this.expandedLesson = lesson;
   }
 }
