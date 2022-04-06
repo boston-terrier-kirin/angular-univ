@@ -28,6 +28,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
@@ -36,6 +37,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateCourseStepOneComponent } from './create-course/create-course-step-one/create-course-step-one.component';
 import { CreateCourseStepTwoComponent } from './create-course/create-course-step-two/create-course-step-two.component';
 import { CourseComponent } from './course/course.component';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { CourseComponent } from './course/course.component';
     CreateCourseStepOneComponent,
     CreateCourseStepTwoComponent,
     CourseComponent,
+    CourseDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import { CourseComponent } from './course/course.component';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
