@@ -37,6 +37,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
     this.paginator.page
       .pipe(
         tap(() => {
+          // ページングを変えたタイミングでイベントがemitされるので、その都度検索しに行ける。
           console.log(`pageIndex: ${this.paginator.pageIndex}`);
           console.log(`pageSize: ${this.paginator.pageSize}`);
           this.loadLessons();

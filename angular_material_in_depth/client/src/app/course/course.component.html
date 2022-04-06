@@ -24,6 +24,9 @@
     <tr mat-row *matRowDef="let lesson; columns: displayedColumns"></tr>
   </table>
 
+  <!-- 
+    paginator自体は総件数/1ページの件数を元に、ページIndexを計算しているだけなので、mat-table以外とも組み合わせて使うことができるはず。
+   -->
   <mat-paginator
     [length]="course.lessonsCount"
     [pageSize]="5"
