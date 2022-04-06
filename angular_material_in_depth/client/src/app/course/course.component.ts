@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,8 +21,11 @@ export class CourseComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns = ['seqNo', 'description', 'duration'];
+  displayedColumns = ['select', 'seqNo', 'description', 'duration'];
   expandedLesson: Lesson | null = null;
+
+  // 複数行選択可、初期選択
+  selection = new SelectionModel<Lesson>(true, []);
 
   constructor(
     private route: ActivatedRoute,
@@ -102,5 +106,23 @@ export class CourseComponent implements OnInit, AfterViewInit {
     }
 
     this.expandedLesson = lesson;
+  }
+
+  selectLesson(lesson: Lesson) {
+    this.selection.toggle(lesson);
+    console.log('selected lessons: ', this.selection.selected);
+  }
+
+  isAllSelected() {
+    return this.selection.selected?.length === this.lessons?.length;
+  }
+
+  selectAll() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.lessons);
   }
 }
