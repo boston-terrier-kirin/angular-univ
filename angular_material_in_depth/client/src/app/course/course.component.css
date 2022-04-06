@@ -22,7 +22,6 @@
 
 .lessons-table {
   margin-top: 10px;
-  width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -34,6 +33,11 @@
 
 .collapsed-detail {
   display: none;
+}
+
+.scrolling-container {
+  max-height: 500px;
+  overflow: auto;
 }
 
 /** 
