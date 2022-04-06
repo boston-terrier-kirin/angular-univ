@@ -62,7 +62,7 @@
       ここが通常のテンプレート。
       クリックすると、toggleLessonを呼びだして、クリックした行が分かるようにする。
     -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
         mat-row
         *matRowDef="let lesson; columns: displayedColumns"
