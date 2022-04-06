@@ -55,6 +55,12 @@ const TREE_DATA: CourseNode[] = [
   },
 ];
 
+interface CourseFlatNode {
+  name: string;
+  expandable: boolean;
+  level: number;
+}
+
 @Component({
   selector: 'tree-demo',
   templateUrl: 'tree-demo.component.html',
@@ -66,8 +72,39 @@ export class TreeDemoComponent implements OnInit {
     (node) => node.children
   );
 
+  flatTreeControl = new FlatTreeControl<CourseFlatNode>(
+    (node) => node.level,
+    (node) => node.expandable
+  );
+
+  treeFlattener = new MatTreeFlattener(
+    (node: CourseNode, level: number): CourseFlatNode => {
+      const children = node.children?.length;
+      let expandable;
+      if (!children) {
+        expandable = false;
+      } else {
+        expandable = true;
+      }
+      return {
+        name: node.name,
+        expandable,
+        level,
+      };
+    },
+    (node) => node.level,
+    (node) => node.expandable,
+    (node) => node.children
+  );
+
+  flatDataSource = new MatTreeFlatDataSource(
+    this.flatTreeControl,
+    this.treeFlattener
+  );
+
   ngOnInit() {
     this.nestedDataSource.data = TREE_DATA;
+    this.flatDataSource.data = TREE_DATA;
   }
 
   hasNestedChild(index: number, node: CourseNode): boolean {
@@ -76,5 +113,9 @@ export class TreeDemoComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  hasFlatChild(index: number, node: CourseFlatNode) {
+    return node.expandable;
   }
 }
