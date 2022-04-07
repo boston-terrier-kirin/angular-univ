@@ -38,6 +38,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HomeComponent } from './home/home.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
+import { LoginReactiveComponent } from './login-reactive/login-reactive.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CourseDialogComponent } from './course-dialog/course-dialog.component';
     HomeComponent,
     CoursesCardListComponent,
     CourseDialogComponent,
+    LoginReactiveComponent,
   ],
   imports: [
     BrowserModule,
