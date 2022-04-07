@@ -35,9 +35,17 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HomeComponent } from './home/home.component';
+import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    CoursesCardListComponent,
+    CourseDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
