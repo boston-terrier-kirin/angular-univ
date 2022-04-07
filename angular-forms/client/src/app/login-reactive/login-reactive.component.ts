@@ -38,14 +38,14 @@ export class LoginReactiveComponent implements OnInit {
   }
 
   hasErrors(name: string) {
-    const { dirty, touched, errors } = this.form.controls[name];
-    console.log(errors);
-    return dirty && touched && errors;
+    const { errors } = this.form.controls[name];
+    return errors;
   }
 
   getErrors(name: string) {
-    const { dirty, touched, errors } = this.form.controls[name];
-    if (dirty && touched && errors) {
+    const { errors } = this.form.controls[name];
+    if (errors) {
+      console.log(name, errors['required']);
       if (errors['required']) {
         return 'Value is required.';
       }
@@ -56,4 +56,21 @@ export class LoginReactiveComponent implements OnInit {
     }
     return null;
   }
+
+  // angular material の mat-errorと組み合わせるのであれば、dirty, touched の判定は、mat-errorに任せた方が無難。
+  // hasErrors(name: string) {
+  //   const { dirty, touched, errors } = this.form.controls[name];
+  //   return dirty && touched && errors;
+  // }
+  //
+  // getErrors(name: string) {
+  //   const { dirty, touched, errors } = this.form.controls[name];
+  //   if (dirty && touched && errors) {
+  //     if (errors['required']) {
+  //       return 'Value is required.';
+  //     }
+  //     return null;
+  //   }
+  //   return null;
+  // }
 }
