@@ -4,20 +4,26 @@
     <form [formGroup]="form" (ngSubmit)="login()" class="login-form data-form">
       <mat-form-field>
         <input
-          formControlName="email"
+          [formControl]="controls.email"
           matInput
           type="email"
           placeholder="Email"
         />
+        <mat-error *ngIf="hasErrors('email')">
+          {{ getErrors("email") }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input
-          formControlName="password"
+          [formControl]="controls.password"
           matInput
           type="password"
           placeholder="Password"
         />
+        <mat-error *ngIf="hasErrors('password')">
+          {{ getErrors("password") }}
+        </mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary">Login</button>
