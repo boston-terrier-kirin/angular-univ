@@ -1,16 +1,28 @@
 <mat-card class="login-page">
   <mat-card-title>Login (Reactive)</mat-card-title>
   <mat-card-content>
-    <form class="login-form data-form">
+    <form [formGroup]="form" (ngSubmit)="login()" class="login-form data-form">
       <mat-form-field>
-        <input matInput type="email" name="email" placeholder="Email" />
+        <input
+          formControlName="email"
+          matInput
+          type="email"
+          placeholder="Email"
+        />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="password" placeholder="Password" />
+        <input
+          formControlName="password"
+          matInput
+          type="password"
+          placeholder="Password"
+        />
       </mat-form-field>
 
       <button mat-raised-button color="primary">Login</button>
     </form>
   </mat-card-content>
 </mat-card>
+
+{{ form.value | json }}
