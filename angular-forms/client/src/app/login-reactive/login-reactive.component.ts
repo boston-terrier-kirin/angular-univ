@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthValidator } from '../validators/auth.validator';
 
 @Component({
   selector: 'login',
@@ -25,11 +26,16 @@ export class LoginReactiveComponent implements OnInit {
       // updateOn: 'blur',
     });
 
-    const password = new FormControl('', {
-      validators: [Validators.required, Validators.minLength(8)],
+    const password = new FormControl(
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        AuthValidator.passwordStrength(),
+      ]
       // updatedOn: 'blur' を使うと、不正値 -> 有効値 に訂正した場合に、blurするまでエラーが消えないデメリットあり。
       // updateOn: 'blur',
-    });
+    );
 
     return {
       email,
@@ -45,14 +51,13 @@ export class LoginReactiveComponent implements OnInit {
   getErrors(name: string) {
     const { errors } = this.form.controls[name];
     if (errors) {
-      console.log(name, errors['required']);
       if (errors['required']) {
         return 'Value is required.';
       }
       if (errors['email']) {
         return 'Invalid format.';
       }
-      return null;
+      return 'ERROR';
     }
     return null;
   }
