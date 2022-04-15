@@ -2,6 +2,7 @@
   <mat-card-title>Login (Reactive)</mat-card-title>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
+      <!--
       <mat-form-field>
         <input
           [formControl]="controls.email"
@@ -13,6 +14,23 @@
           {{ getErrors("email") }}
         </mat-error>
       </mat-form-field>
+      -->
+
+      <!-- 
+        app-input を使うと、inputの幅が狭くなる理由。
+        ・formのCSS：login-formがflexコンテナで、align-itemはデフォルトのstretchが効いているため、
+        　form直下のmat-form-fieldとbuttonは幅が100%になる。
+        ・同じくapp-inputも幅は100%になっているが、app-input -> mat-form-fieldになっているため、mat-form-fieldの幅は100%にならない。
+        ・仮に、input.component.scss でmat-form-fieldをdisplay: block;にすると、幅は100%になる。
+
+        ・一方で、CSS：login-formをalign-items: center に変更すると、strechが効かなくなって、幅は小さくなってしまう。
+       -->
+
+      <app-input
+        [control]="controls.email"
+        type="email"
+        placeholder="Email"
+      ></app-input>
 
       <mat-form-field>
         <input

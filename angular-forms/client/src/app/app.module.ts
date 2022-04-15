@@ -43,6 +43,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateCourseStep1Component } from './create-course/create-course-step-1/create-course-step-1.component';
 import { CreateCourseStep2Component } from './create-course/create-course-step-2/create-course-step-2.component';
 import { CreateCourseStep3Component } from './create-course/create-course-step-3/create-course-step-3.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CreateCourseStep3Component } from './create-course/create-course-step-3
     MatGridListModule,
     MatTreeModule,
     ScrollingModule,
+    SharedModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
