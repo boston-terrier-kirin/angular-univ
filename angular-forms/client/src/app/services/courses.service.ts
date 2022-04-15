@@ -5,6 +5,10 @@ import { Course } from '../model/course';
 import { map } from 'rxjs/operators';
 import { Lesson } from '../model/lesson';
 
+interface CoursesResponse {
+  [payload: string]: Course[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,8 +27,8 @@ export class CoursesService {
 
   findAllCourses(): Observable<Course[]> {
     return this.http
-      .get('/api/courses')
-      .pipe(map((res: any) => res['payload']));
+      .get<CoursesResponse>('/api/courses')
+      .pipe(map((res) => res['payload']));
   }
 
   findAllCourseLessons(courseId: number): Observable<Lesson[]> {

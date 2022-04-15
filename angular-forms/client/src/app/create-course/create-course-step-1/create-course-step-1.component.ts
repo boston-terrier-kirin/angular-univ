@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoursesService } from '../../services/courses.service';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { courseValidator } from 'src/app/validators/course.validator';
 
 @Component({
   selector: 'create-course-step-1',
@@ -18,6 +12,8 @@ export class CreateCourseStep1Component implements OnInit {
   controls = this.createControls();
   form = new FormGroup(this.controls);
 
+  constructor(private coursesService: CoursesService) {}
+
   ngOnInit() {}
 
   createControls() {
@@ -27,6 +23,7 @@ export class CreateCourseStep1Component implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(60),
       ],
+      asyncValidators: [courseValidator(this.coursesService)],
     });
     return {
       title,
