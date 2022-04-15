@@ -40,6 +40,8 @@ export class CourseDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    // Section2-16
+    // ここでやろうとしているのは、Pre-Save/Auto-Saveのようなこと。
     this.form.valueChanges
       .pipe(
         filter(() => {
