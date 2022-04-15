@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { CoursesService } from '../../services/courses.service';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -10,5 +15,21 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./create-course-step-1.component.css'],
 })
 export class CreateCourseStep1Component implements OnInit {
+  controls = this.createControls();
+  form = new FormGroup(this.controls);
+
   ngOnInit() {}
+
+  createControls() {
+    const title = new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(60),
+      ],
+    });
+    return {
+      title,
+    };
+  }
 }
