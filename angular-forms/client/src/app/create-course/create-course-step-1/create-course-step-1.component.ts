@@ -24,7 +24,10 @@ export class CreateCourseStep1Component implements OnInit {
         Validators.maxLength(60),
       ],
       asyncValidators: [courseValidator(this.coursesService)],
+      // この場合はasyncValidatorが走りまくるので、泣く泣くupdateOn: blur を使う。
+      updateOn: 'blur',
     });
+
     return {
       title,
     };
