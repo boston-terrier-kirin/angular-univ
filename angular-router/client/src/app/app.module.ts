@@ -37,8 +37,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { SharedModule } from './shared/shared.module';
 
+import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './about/about.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AboutComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
