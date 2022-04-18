@@ -35,6 +35,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -70,6 +71,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatGridListModule,
     MatTreeModule,
     ScrollingModule,
+    SharedModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
