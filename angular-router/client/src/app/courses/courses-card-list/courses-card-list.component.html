@@ -10,7 +10,25 @@
   </mat-card-content>
 
   <mat-card-actions class="course-actions">
-    <button mat-button class="mat-raised-button mat-primary">
+    <!-- 
+      [routerLink]="[course.url]"の[course.url]は、配列なので、[]がなくても結果は同じ。
+     -->
+    <button
+      [routerLink]="[course.url]"
+      mat-button
+      class="mat-raised-button mat-primary"
+    >
+      VIEW COURSE
+    </button>
+
+    <!-- 
+      [routerLink]="[course.url]"の[course.url]は、配列なので、[]がなくても結果は同じ。
+     -->
+    <button
+      [routerLink]="course.url"
+      mat-button
+      class="mat-raised-button mat-primary"
+    >
       VIEW COURSE
     </button>
 

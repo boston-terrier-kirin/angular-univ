@@ -10,15 +10,15 @@ export function getAllCourses(req: Request, res: Response) {
 
   setTimeout(() => {
     res.status(200).json({ payload: Object.values(COURSES) });
-  }, 400);
+  }, 2000);
 }
 
 export function getCourseByUrl(req: Request, res: Response) {
   const courseUrl = req.params['id'];
-
   const courses: any = Object.values(COURSES);
-
   const course = courses.find((course) => course.url == courseUrl);
 
-  res.status(200).json(course);
+  setTimeout(() => {
+    res.status(200).json(course);
+  }, 3000);
 }

@@ -25,9 +25,7 @@ export class HomeComponent implements OnInit {
 
   reloadCourses() {
     const courses$ = this.courses.loadAllCourses();
-
     this.beginnerCourses$ = this.filterByCategory(courses$, 'BEGINNER');
-
     this.advancedCourses$ = this.filterByCategory(courses$, 'ADVANCED');
   }
 
