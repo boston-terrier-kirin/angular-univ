@@ -28,6 +28,7 @@ export class LessonDetailResolver implements Resolve<LessonDetail> {
      * こういう場合はどうすれば？
      */
     if (url && lessonSeqNo) {
+      console.log('LessonDetailResolve', url, lessonSeqNo);
       return this.coursesService.loadLessonDetail(url, lessonSeqNo);
     }
 

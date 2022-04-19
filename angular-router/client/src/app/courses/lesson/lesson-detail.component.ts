@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { LessonDetail } from '../model/lesson-detail';
 
 @Component({
@@ -8,19 +9,39 @@ import { LessonDetail } from '../model/lesson-detail';
   styleUrls: ['./lesson-detail.component.css'],
 })
 export class LessonDetailComponent implements OnInit {
-  // lesson$ = new Observable<LessonDetail>();
   lesson: LessonDetail | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {
+    console.log('LessonDetailComponent.constructor');
+  }
 
   ngOnInit() {
     // LessonsListComponentとやりかたを変えて、Observableにしてみたけど、やっぱりNG。
     // this.lesson$ = this.route.snapshot.data['lesson'];
 
-    this.lesson = this.route.snapshot.data['lesson'];
+    /**
+     * ngOnInitは1回しか呼ばれていないので、prev/nextを読んでも新しいLessonが取得されない。
+     * snapshotは文字通り最初の1回しか呼ばれない。
+     */
+    // this.lesson = this.route.snapshot.data['lesson'];
+
+    // Obsevableに変えることで解決。
+    // この例ではparamではなく、data。
+    this.route.data
+      .pipe(
+        map((data) => {
+          console.log('LessonDetailComponent.ngOnInit', data);
+          return data['lesson'];
+        })
+      )
+      .subscribe((data) => {
+        this.lesson = data;
+      });
   }
 
   prev(lesson: LessonDetail) {
+    console.log('LessonDetailComponent.prev');
+
     // 今のurl
     // http://localhost:4200/courses/angular-router-course/lessons/3
     // 　↓
@@ -35,6 +56,8 @@ export class LessonDetailComponent implements OnInit {
   }
 
   next(lesson: LessonDetail) {
+    console.log('LessonDetailComponent.next');
+
     this.router.navigate(['lessons', lesson.seqNo + 1], {
       relativeTo: this.route.parent,
     });
