@@ -34,8 +34,14 @@ export class LessonDetailComponent implements OnInit {
           return data['lesson'];
         })
       )
-      .subscribe((data) => {
-        this.lesson = data;
+      .subscribe({
+        next: (data) => {
+          this.lesson = data;
+        },
+        complete: () => {
+          // このケースはcompleteしないため、async pipe を使うのが正解。
+          console.log('LessonDetailComponent.complete');
+        },
       });
   }
 
