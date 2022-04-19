@@ -1,12 +1,18 @@
-<a class="back" href="javascript:void(0)">Back To Course</a>
+<!-- 
+  http://localhost:4200/courses/angular-router-course/lessons/2
+    ↓
+  http://localhost:4200/courses/angular-router-course
+  　なので、2つ上に上る。
+-->
+<a class="back" [routerLink]="['../../']">Back To Course</a>
 
-<div class="lesson-detail" *ngIf="lesson$ | async as lesson">
+<div class="lesson-detail" *ngIf="lesson">
   <h3>{{ lesson.description }}</h3>
 
   <h5>Duration: {{ lesson.duration }}</h5>
 
   <div class="video-container">
-    <mat-icon class="nav-button" *ngIf="!lesson.first">
+    <mat-icon class="nav-button" *ngIf="!lesson.first" (click)="prev(lesson)">
       navigate_before
     </mat-icon>
 
@@ -19,6 +25,8 @@
     >
     </iframe>
 
-    <mat-icon class="nav-button" *ngIf="!lesson.last"> navigate_next </mat-icon>
+    <mat-icon class="nav-button" *ngIf="!lesson.last" (click)="next(lesson)">
+      navigate_next
+    </mat-icon>
   </div>
 </div>

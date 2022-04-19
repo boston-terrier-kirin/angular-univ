@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { LessonDetailComponent } from './lesson/lesson-detail.component';
 import { LessonsListComponent } from './lessons-list/lessons-list.component';
 import { CoursesResolver } from './services/courses.resolver';
+import { LessonDetailResolver } from './services/lesson-detail.resolver';
 import { LessonsResolver } from './services/lessons.resolver';
 
 const routes: Routes = [
@@ -46,6 +47,9 @@ const routes: Routes = [
         // (b) http://localhost:4200/courses/angular-router-course/lessons/1
         path: 'lessons/:lessonSeqNo',
         component: LessonDetailComponent,
+        resolve: {
+          lesson: LessonDetailResolver,
+        },
       },
     ],
   },
@@ -54,6 +58,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [CoursesResolver, LessonsResolver],
+  providers: [CoursesResolver, LessonsResolver, LessonDetailResolver],
 })
 export class CoursesRoutingModule {}
