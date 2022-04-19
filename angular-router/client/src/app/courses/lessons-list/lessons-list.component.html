@@ -7,9 +7,39 @@
     <th>Duration</th>
   </thead>
 
-  <tr class="lesson-row" *ngFor="let lesson of lessons">
+  <!-- 
+    http://localhost:4200/courses/angular-router-course
+      からの相対パスで
+    http://localhost:4200/courses/angular-router-course/lessons/1
+    　になる。
+   -->
+  <tr
+    class="lesson-row"
+    *ngFor="let lesson of lessons"
+    [routerLink]="['lessons', lesson.seqNo]"
+  >
     <td class="seqno-cell">{{ lesson.seqNo }}</td>
     <td class="description-cell">{{ lesson.description }}</td>
     <td class="duration-cell">{{ lesson.duration }}</td>
   </tr>
 </table>
+
+<!--
+<tr class="lesson-row"
+    *ngFor="let lesson of lessons"
+    [routerLink]="lesson.seqNo"
+>
+これは、seqNoがnumberなのでエラーになる。
+
+・[lesson.seqNo]で解決する。
+<tr class="lesson-row"
+    *ngFor="let lesson of lessons"
+    [routerLink]="[lesson.seqNo]"
+>
+
+・toString()で解決する。
+<tr class="lesson-row"
+    *ngFor="let lesson of lessons"
+    [routerLink]="lesson.seqNo.toString()"
+>
+-->
